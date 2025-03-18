@@ -6,6 +6,7 @@
     <xacro:property name="link2_length" value="1.0"/>
     <xacro:property name="link_width" value="0.1"/>
     <xacro:property name="mass" value="1.0"/>
+    <xacro:property name="gap" value="0.05"/>  <!-- Offset to prevent touching -->
 
     <!-- Link 1 -->
     <link name="link1">
@@ -35,9 +36,9 @@
     <joint name="joint1" type="revolute">
         <parent link="link1"/>
         <child link="link2"/>
-        <origin xyz="0 0 ${link1_length}"/>
+        <origin xyz="0 0 ${link1_length + gap}"/>  <!-- Offset added -->
         <axis xyz="1 0 0"/>
-        <limit effort="10.0" lower="-1.57" upper="1.57" velocity="1.0"/>
+        <limit effort="10.0" lower="-3.14" upper="3.14" velocity="1.0"/>
         <dynamics damping="0.5" friction="0.1"/>
     </joint>
 

@@ -4,6 +4,7 @@
 <!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
 <!-- =================================================================================== -->
 <robot name="marv">
+  <!-- Offset to prevent touching -->
   <!-- Link 1 -->
   <link name="link1">
     <visual>
@@ -31,9 +32,10 @@
   <joint name="joint1" type="revolute">
     <parent link="link1"/>
     <child link="link2"/>
-    <origin xyz="0 0 1.0"/>
+    <origin xyz="0 0 1.05"/>
+    <!-- Offset added -->
     <axis xyz="1 0 0"/>
-    <limit effort="10.0" lower="-1.57" upper="1.57" velocity="1.0"/>
+    <limit effort="10.0" lower="-3.14" upper="3.14" velocity="1.0"/>
     <dynamics damping="0.5" friction="0.1"/>
   </joint>
   <!-- Link 2 -->
