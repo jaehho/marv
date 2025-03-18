@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<robot name="marv" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Define some reusable macros for length, width, and mass -->
+    <xacro:property name="link1_length" value="1.0"/>
+    <xacro:property name="link2_length" value="1.0"/>
+    <xacro:property name="link_width" value="0.1"/>
+    <xacro:property name="mass" value="1.0"/>
+
+    <!-- Link 1 -->
+    <link name="link1">
+        <visual>
+            <geometry>
+                <box size="${link_width} ${link_width} ${link1_length}"/>
+            </geometry>
+            <origin xyz="0 0 ${link1_length/2}"/>
+            <material name="blue">
+                <color rgba="0 0 1 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="${link_width} ${link_width} ${link1_length}"/>
+            </geometry>
+            <origin xyz="0 0 ${link1_length/2}"/>
+        </collision>
+        <inertial>
+            <mass value="${mass}"/>
+            <origin xyz="0 0 ${link1_length/2}"/>
+            <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+        </inertial>
+    </link>
+
+    <!-- Joint -->
+    <joint name="joint1" type="revolute">
+        <parent link="link1"/>
+        <child link="link2"/>
+        <origin xyz="0 0 ${link1_length}"/>
+        <axis xyz="1 0 0"/>
+        <limit effort="10.0" lower="-1.57" upper="1.57" velocity="1.0"/>
+        <dynamics damping="0.5" friction="0.1"/>
+    </joint>
+
+    <!-- Link 2 -->
+    <link name="link2">
+        <visual>
+            <geometry>
+                <box size="${link_width} ${link_width} ${link2_length}"/>
+            </geometry>
+            <origin xyz="0 0 ${link2_length/2}"/>
+            <material name="red">
+                <color rgba="1 0 0 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="${link_width} ${link_width} ${link2_length}"/>
+            </geometry>
+            <origin xyz="0 0 ${link2_length/2}"/>
+        </collision>
+        <inertial>
+            <mass value="${mass}"/>
+            <origin xyz="0 0 ${link2_length/2}"/>
+            <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+        </inertial>
+    </link>
+
+</robot>
